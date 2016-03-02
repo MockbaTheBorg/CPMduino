@@ -20,13 +20,15 @@ void setup(void)
 {
 	pinMode(LED, OUTPUT);
 	digitalWrite(LED, LOW);
+	pinMode(SDcs, OUTPUT);
+	digitalWrite(SDcs, LOW);
 	Serial.begin(9600);
 	while (!Serial);    // Wait until serial is connected
 
 	_puts("CPMduino v1.1 by Marcelo Dantas\r\n");
 	_puts("-------------------------------\r\n");
 
-	if (SD.begin(SDcs))
+	if (SD.begin(SDcs, SPI_HALF_SPEED))
 	{
 		if (SD.exists(CCPname))
 		{
