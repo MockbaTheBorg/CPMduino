@@ -25,7 +25,7 @@ void setup(void)
 	Serial.begin(9600);
 	while (!Serial);    // Wait until serial is connected
 
-	_puts("CPMduino v1.1 by Marcelo Dantas\r\n");
+	_puts("CPMduino v1.2 by Marcelo Dantas\r\n");
 	_puts("Arduino pin support by Krzystoff Klis\r\n");
 	_puts("-------------------------------------\r\n");
 
