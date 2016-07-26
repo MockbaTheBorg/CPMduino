@@ -26,8 +26,8 @@ void setup(void)
 	while (!Serial);    // Wait until serial is connected
 
 	_puts("CPMduino v1.2 by Marcelo Dantas\r\n");
-	_puts("Arduino pin support by Krzystoff Klis\r\n");
-	_puts("-------------------------------------\r\n");
+	_puts("Arduino pin support by Krzystof Klis\r\n");
+	_puts("------------------------------------\r\n");
 
 	if (SD.begin(SDcs, SPI_HALF_SPEED))
 	{

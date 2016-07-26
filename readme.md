@@ -8,7 +8,7 @@ CPMduino so far runs only on the Arduino DUE. It requires a fair amount of RAM t
 CPMduino needs a SDFat library. I am using the one from https://github.com/greiman/SdFat
 CPMduino needs a SD (or microSD) card shield.
 
-Arduino digital and analog read/write added by Krzystoff Klis via BDOS calls (see cpm.h file for details).
+Arduino digital and analog read/write added by Krzystof Klis via BDOS calls (see cpm.h file for details).
 
 ## Getting Started
 
