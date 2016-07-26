@@ -53,7 +53,7 @@ typedef struct {
 	uint8 ex, s1, s2, rc;
 	uint8 al[16];
 	uint8 cr, r0, r1, r2;
-} FCB;
+} CPM_FCB;
 
 typedef struct {
 	uint8 uu;
@@ -61,11 +61,11 @@ typedef struct {
 	uint8 tp[3];
 	uint8 xl, bc, xh, rc;
 	uint8 al[16];
-} DIR;
+} CPM_DIR;
 
 void _GetFile(uint16 fcbaddr, uint8* filename)
 {
-	FCB* F = (FCB*)&RAM[fcbaddr];
+	CPM_FCB* F = (CPM_FCB*)&RAM[fcbaddr];
 	unsigned char i = 0, j = 0;
 
 	while (i < 8) {
@@ -87,7 +87,7 @@ void _GetFile(uint16 fcbaddr, uint8* filename)
 
 void _SetFile(uint16 fcbaddr, uint8* filename)
 {
-	FCB* F = (FCB*)&RAM[fcbaddr];
+	CPM_FCB* F = (CPM_FCB*)&RAM[fcbaddr];
 	int i = 0;
 
 	while (*filename != 0 && *filename != '.') {
@@ -116,7 +116,7 @@ void _SetFile(uint16 fcbaddr, uint8* filename)
 
 void _SetFCBFile(uint16 fcbaddr, uint8* filename)
 {
-	FCB* F = (FCB*)&RAM[fcbaddr];
+	CPM_FCB* F = (CPM_FCB*)&RAM[fcbaddr];
 
 	int i = 0;
 	while (i < 8) {
