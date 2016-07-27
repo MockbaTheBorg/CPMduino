@@ -25,7 +25,7 @@ void setup(void)
 	Serial.begin(9600);
 	while (!Serial);    // Wait until serial is connected
 
-	_puts("CPMduino v1.2 by Marcelo Dantas\r\n");
+	_puts("CPMduino v1.3 by Marcelo Dantas\r\n");
 	_puts("Arduino pin support by Krzystof Klis\r\n");
 	_puts("------------------------------------\r\n");
 
@@ -40,13 +40,14 @@ void setup(void)
 				{
 					if (_RamVerify(CCPname, CCPaddr))
 					{
-						_PatchCPM();
+						if (Status != 2)
+							_PatchCPM();
 						Z80reset();
-						SET_LOW_REGISTER(BC, drive[0] - 'A');
+						SET_LOW_REGISTER(BC, _RamRead(0x0004));
 						PC = CCPaddr;
 						Z80run();
 						if (Status == 1)
-							drive[0]='A';
+							_RamWrite(0x0004, 0);
 					}
 					else {
 						_puts("Error writing the CCP to RAM. CPU halted.\r\n");
