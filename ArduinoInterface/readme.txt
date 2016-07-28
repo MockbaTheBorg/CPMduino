@@ -17,7 +17,7 @@ BDOS function 221 (0xDD) - DigitalRead:
  LD D, pin_number
  CALL 5
 
-Result is stored in A.
+Returns result in A (0 = LOW, 1 = HIGH).
 
 =====================================================
 
@@ -36,7 +36,7 @@ BDOS function 223 (0xDF) - AnalogRead:
  LD D, pin_number
  CALL 5
 
-Result is stored in AF.
+Return result in HL (0 - 1023).
 
 =====================================================
 
