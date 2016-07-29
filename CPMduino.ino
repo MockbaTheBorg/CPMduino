@@ -25,9 +25,10 @@ void setup(void)
 	Serial.begin(9600);
 	while (!Serial);    // Wait until serial is connected
 
-	_puts("CPMduino v1.3 by Marcelo Dantas\r\n");
-	_puts("Arduino pin support by Krzysztof Klis\r\n");
-	_puts("------------------------------------\r\n");
+	_puts("CP/M 2.2 Emulator v2.0 by Marcelo Dantas.\r\n");
+	_puts("Arduino read/write support by Krzysztof Klis\r\n");
+	_puts("      Build " __DATE__ " - " __TIME__ "\r\n");
+	_puts("--------------------------------------------\r\n");
 
 	if (SD.begin(SDcs, SPI_HALF_SPEED))
 	{
@@ -35,6 +36,7 @@ void setup(void)
 		{
 			while (true)
 			{
+				_puts("\n64k CP/M Vers 2.2\r\n");
 				SD.chdir();
 				if (_RamLoad(CCPname, CCPaddr))
 				{
