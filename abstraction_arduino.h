@@ -186,7 +186,7 @@ bool findFirst(uint8* pattern, uint8* fcbname)
 
 	SD.vwd()->rewind();
 	while (dir.openNext(SD.vwd(), O_READ)) {
-		dir.getFilename((char*)dirname);
+		dir.getName((char*)dirname, 13);
 		isfile = dir.isFile();
 		dir.close();
 		if (!isfile)
@@ -210,7 +210,7 @@ bool findNext(uint8* pattern, uint8* fcbname)
 
 	SD.vwd()->rewind();
 	while (dir.openNext(SD.vwd(), O_READ)) {
-		dir.getFilename((char*)dirname);
+		dir.getName((char*)dirname, 13);
 		isfile = dir.isFile();
 		dir.close();
 		if (!isfile)
@@ -220,7 +220,7 @@ bool findNext(uint8* pattern, uint8* fcbname)
 			break;
 	}
 	while (dir.openNext(SD.vwd(), O_READ)) {
-		dir.getFilename((char*)dirname);
+		dir.getName((char*)dirname, 13);
 		dir.close();
 		//		if (!dir.isFile())
 		//			continue;
