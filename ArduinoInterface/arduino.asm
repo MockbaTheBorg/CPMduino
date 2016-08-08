@@ -1,12 +1,11 @@
-org 100h
-LD C,220
-LD D,13
-LD E,1
-CALL 5
-LD C,222
-LD D,13
-LD E,1
-CALL 5
-RET
-END
-
+org  100h
+mvi  c,220
+mvi  d,53  ;pin number
+mvi  e,1   ;pin state
+push d
+call 5
+pop  d
+mvi  c,222
+call 5
+ret
+
