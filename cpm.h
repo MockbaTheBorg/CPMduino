@@ -6,7 +6,7 @@
 #define INa		0xdb	// Triggers a BIOS call
 #define OUTa	0xd3	// Triggers a BDOS call
 
-#define CCPname "cpm22.bin"
+#define CCPname "CPM22.BIN"
 uint16 CCPaddr = 0xE400;
 uint8 CCPmode = 1;
 
@@ -28,7 +28,8 @@ void _PatchCPM(void)
 	_RamWrite(0x0003, 0x00);
 
 	/* Current drive/user - A:/0 */
-	_RamWrite(0x0004, 0x00);
+	if (Status!=2)
+		_RamWrite(0x0004, 0x00);
 
 	/* BDOS entry point (0x0005) */
 	_RamWrite(0x0005, JP);
@@ -176,9 +177,9 @@ void _PatchCPM(void)
 }
 
 #ifdef DEBUGLOG
-_logMemory(pos, size)
+void _logMemory(uint16 pos, uint8 size)
 {
-	FILE* file = _fopen_a("RunCPM.log");
+	FILE* file = _fopen_a((uint8 *)"RunCPM.log");
 	uint16 h = pos;
 	uint16 c = pos;
 	uint8 l, i;
@@ -203,24 +204,24 @@ _logMemory(pos, size)
 	_fclose(file);
 }
 
-_logBiosIn(uint8 ch)
+void _logBiosIn(uint8 ch)
 {
-	FILE* file = _fopen_a("RunCPM.log");
+	FILE* file = _fopen_a((uint8 *)"RunCPM.log");
 	fprintf(file, "Bios call: %d (0x%02x)\r\n", ch, ch);
 	fprintf(file, "\tIn : BC=%04x DE=%04x HL=%04x AF=%04x SP=%04x PC=%04x IOByte=%02x\r\n", BC, DE, HL, AF, SP, PCX, _RamRead(4));
 	_fclose(file);
 }
 
-_logBiosOut(uint8 ch)
+void _logBiosOut(uint8 ch)
 {
-	FILE* file = _fopen_a("RunCPM.log");
+	FILE* file = _fopen_a((uint8 *)"RunCPM.log");
 	fprintf(file, "\tOut: BC=%04x DE=%04x HL=%04x AF=%04x SP=%04x PC=%04x IOByte=%02x\r\n", BC, DE, HL, AF, SP, PCX, _RamRead(4));
 	_fclose(file);
 }
 
-_logBdosIn(uint8 ch)
+void _logBdosIn(uint8 ch)
 {
-	FILE* file = _fopen_a("RunCPM.log");
+	FILE* file = _fopen_a((uint8 *)"RunCPM.log");
 	fprintf(file, "Bdos call: %d (0x%02x) - ", ch, ch);
 	switch (ch){
 	case 0:
@@ -371,6 +372,7 @@ _logBdosIn(uint8 ch)
 	_fclose(file);
 
 	switch (ch){
+	case 9:
 	case 15:
 	case 16:
 	case 17:
@@ -392,13 +394,14 @@ _logBdosIn(uint8 ch)
 	}
 }
 
-_logBdosOut(uint8 ch)
+void _logBdosOut(uint8 ch)
 {
-	FILE* file = _fopen_a("RunCPM.log");
+	FILE* file = _fopen_a((uint8 *)"RunCPM.log");
 	fprintf(file, "\tOut: BC=%04x DE=%04x HL=%04x AF=%04x SP=%04x PC=%04x IOByte=%02x\r\n", BC, DE, HL, AF, SP, PCX, _RamRead(4));
 	_fclose(file);
 
 	switch (ch){
+	case 10:
 	case 15:
 	case 16:
 	case 17:

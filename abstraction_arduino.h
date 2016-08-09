@@ -40,6 +40,7 @@ void _RamWrite(uint16 address, uint8 value)
 uint8	pattern[12];
 uint8	fcbname[12];
 uint8	filename[15];
+uint8	newname[13];
 uint16	dmaAddr = 0x0080;
 uint16	roVector = 0;
 uint16	loginVector = 0;
@@ -146,7 +147,7 @@ void dirToFCB(uint8* from, uint8* to)
 		to++;  i++;
 	}
 	if (*from == '.') {
-		*from++;
+		from++;
 	}
 	i = 0;
 	while (*from != 0) {

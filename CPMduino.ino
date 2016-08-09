@@ -43,8 +43,7 @@ void setup(void)
 				{
 					if (_RamVerify(CCPname, CCPaddr))
 					{
-						if (Status != 2)
-							_PatchCPM();
+						_PatchCPM();
 						Z80reset();
 						SET_LOW_REGISTER(BC, _RamRead(0x0004));
 						PC = CCPaddr;
